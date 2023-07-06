@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Similarity Project</title>
+</head>
+
+<body>
+  <h1>Text Similarity Project</h1>
+  <div style="margin-top: 10px;">
+    <input type="text">
+    <button>Compare</button>
+  </div>
+
+  <script>
+    angular.module('TextSimilarityApp', [])
+      .controller('TextSimilarityController', function ($scope, $http) {
+        $scope.compare = function () {
+          $http.post('http://localhost:5000/api/similarity', {
+            text1: $scope.text1,
+            text2: $scope.text2
+          }).then(function (response) {
+            $scope.comparisonResult = response.data.similarity;
+          });
+        };
+      });
+  </script>
+</body>
+
+</html>
